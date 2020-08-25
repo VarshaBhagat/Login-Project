@@ -17,13 +17,7 @@ const Login = () => {
             <label htmlFor="email" className="label">
               Email:{" "}
             </label>
-            <input
-              type="text"
-              id="email"
-              className="input-box"
-              required
-              pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
-            />
+            <input type="text" id="email" className="input-box" required />
           </div>
           <div className="label-container">
             <label htmlFor="pass" className="label">
