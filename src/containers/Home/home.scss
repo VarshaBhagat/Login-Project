@@ -1,1 +1,57 @@
+@import "src/shared/SCSS/color.scss";
 
+.home-container {
+  display: flex;
+  width: inherit;
+  height: inherit;
+  overflow: hidden;
+}
+
+.details-container {
+  background: $body-color;
+  height: inherit;
+  width: 90%;
+  padding: 1.9rem;
+  overflow: hidden;
+  .details {
+    border: 2px solid;
+    padding: 1.3rem;
+    margin-bottom: 1rem;
+    display: flex;
+  }
+  .details-partent {
+    overflow-y: auto;
+    height: 100vh;
+  }
+}
+
+.item-intro {
+  width: 90%;
+  .description {
+    margin: 0;
+    text-transform: capitalize;
+  }
+}
+
+.item-action {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2rem;
+  justify-content: space-between;
+
+  .details-btn {
+    background: $error-color;
+    color: $white;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+    outline: 0;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+  }
+
+  .add-comment {
+    color: $error-color;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+}
