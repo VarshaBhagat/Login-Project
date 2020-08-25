@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import { fetchPosts } from "./actions";
 import "./home.scss";
 
 const Details = ({ item }) => (
@@ -28,19 +32,19 @@ const Details = ({ item }) => (
   </div>
 );
 
-const Home = () => {
-  const [data, setData] = useState([]);
+const Home = ({ fetchPosts, postsList }) => {
   useEffect(() => {
     fetch("http://jsonplaceholder.typicode.com/posts")
       .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
+      .then((data) => fetchPosts(data));
+  }, [fetchPosts]);
+
   return (
     <div className="details-container">
       <h2>Home</h2>
       <h1>User Name</h1>
       <div className="details-partent">
-        {data.map((item) => (
+        {postsList.map((item) => (
           <Details item={item} key={item.id} />
         ))}
       </div>
@@ -48,4 +52,16 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return { postsList: state.postsState.postsList };
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchPosts,
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
