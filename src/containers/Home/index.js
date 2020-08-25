@@ -7,6 +7,20 @@ const Details = ({ item }) => (
     <div className="item-intro">
       <h3 className="description">{item.title}</h3>
       <p className="description">{item.body}</p>
+      <div className="date-details">
+        <div className="date-item">
+          <div>start date</div>
+          <div>{new Date().toDateString().slice(3)}</div>
+        </div>
+        <div className="date-item">
+          <div>end date</div>
+          <div>{new Date().toDateString().slice(3)}</div>
+        </div>
+        <div className="date-item">
+          <div>comments</div>
+          <div className="comment-count">1211</div>
+        </div>
+      </div>
     </div>
     <div className="item-action">
       <button className="details-btn">Details</button>

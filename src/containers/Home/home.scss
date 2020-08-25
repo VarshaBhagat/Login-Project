@@ -55,3 +55,24 @@
     cursor: pointer;
   }
 }
+
+.date-details {
+  display: flex;
+  text-transform: capitalize;
+  margin-top: 0.4rem;
+  .date-item {
+    margin-right: 1rem;
+  }
+  .comment-count {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .item-action {
+    padding: 0;
+  }
+  .details-container .details {
+    flex-direction: column;
+  }
+}
