@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../../shared/components/sidebar";
 import "./home.scss";
 
 const Details = ({ item }) => (
@@ -37,16 +36,13 @@ const Home = () => {
       .then((data) => setData(data));
   }, []);
   return (
-    <div className="home-container">
-      <Sidebar />
-      <div className="details-container">
-        <h2>Home</h2>
-        <h1>User Name</h1>
-        <div className="details-partent">
-          {data.map((item) => (
-            <Details item={item} key={item.id} />
-          ))}
-        </div>
+    <div className="details-container">
+      <h2>Home</h2>
+      <h1>User Name</h1>
+      <div className="details-partent">
+        {data.map((item) => (
+          <Details item={item} key={item.id} />
+        ))}
       </div>
     </div>
   );

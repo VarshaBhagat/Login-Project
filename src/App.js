@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 
-import Home from "./containers/Home";
+import Page from "./containers/Page";
 import Login from "./containers/Login";
 import "./App.scss";
 
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Route exact path="/" component={Login} />
-        <Route path="/home" component={Home} />
+        <Route path="/*" component={Page} />
       </BrowserRouter>
     </div>
   );
