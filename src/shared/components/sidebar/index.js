@@ -15,6 +15,7 @@ const Sidebar = () => {
 
   return (
     <>
+      {/* mobile view */}
       <div className="mobile-container">
         <a href="/home">
           <img src={window.location.origin + "/image/home.png"} alt="logo" />
@@ -50,6 +51,8 @@ const Sidebar = () => {
           />
         </a>
       </div>
+
+      {/* desktop view */}
       <div className="sidebar-container">
         <a href="/home" className="img-container logo">
           <img src={window.location.origin + "/image/home.png"} alt="logo" />
