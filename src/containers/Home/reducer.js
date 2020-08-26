@@ -1,4 +1,4 @@
-import { GET_POSTS } from "./constants";
+import { FETCH_POSTS } from "./constants";
 
 const defaultState = {
   postsList: [],
@@ -6,7 +6,7 @@ const defaultState = {
 
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
-    case GET_POSTS: {
+    case FETCH_POSTS: {
       return { ...state, postsList: action.payload };
     }
     default:

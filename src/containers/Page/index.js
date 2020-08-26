@@ -1,19 +1,18 @@
 import React from "react";
 import { Route, BrowserRouter } from "react-router-dom";
-import Sidebar from "../../shared/components/sidebar";
+import CustomisedDrawer from "../../Components/Drawer";
 
 import Home from "../Home";
-import Profile from "../Profile";
+import Details from "../Details";
 
 function Page() {
   return (
-    <div className="home-container">
-      <Sidebar />
+    <CustomisedDrawer>
       <BrowserRouter>
-        <Route path="/home" component={Home} />
-        <Route path="/profile" component={Profile} />
+        <Route path="/page/home" component={Home} />
+        <Route path="/page/details" component={Details} />
       </BrowserRouter>
-    </div>
+    </CustomisedDrawer>
   );
 }
 

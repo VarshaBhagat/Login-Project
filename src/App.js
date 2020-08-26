@@ -1,31 +1,34 @@
 import React from "react";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { composeWithDevTools } from "redux-devtools-extension";
 import { Route, BrowserRouter } from "react-router-dom";
+import thunkMiddleware from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import Page from "./containers/Page";
 import Login from "./containers/Login";
 
 import postsReducer from "./containers/Home/reducer";
+import postReducer from "./containers/Details/reducer";
 
-// const middleware = [thunk];
+import "./app.css";
 
-// setup store
-const store = createStore(
-  combineReducers({
-    postsState: postsReducer,
-  }),
-  composeWithDevTools()
-);
+const rootReducer = combineReducers({
+  postsState: postsReducer,
+  postState: postReducer,
+});
+
+const middlewares = [thunkMiddleware];
+const middlewareEnhancer = applyMiddleware(...middlewares);
+const store = createStore(rootReducer, composeWithDevTools(middlewareEnhancer));
 
 const App = () => {
   return (
     <Provider store={store}>
-      <div className="App">
+      <div className="app">
         <BrowserRouter>
-          <Route exact path="/" component={Login} />
-          <Route path="/*" component={Page} />
+          <Route exact path="/login" component={Login} />
+          <Route path="/page/*" component={Page} />
         </BrowserRouter>
       </div>
     </Provider>
