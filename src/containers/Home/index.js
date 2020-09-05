@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
+import ReactPaginate from "react-paginate";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -9,6 +10,7 @@ import styles from "./styles";
 import Popup from "../../Components/Popup";
 import CommentTable from "../CommentPopup/CommentTable";
 import { fetchPosts } from "./actions";
+import "./style.css";
 
 const DateContainer = ({ title, date }) => (
   <Grid item lg={1} md={2} xs={6}>
@@ -30,7 +32,7 @@ const Details = ({ item, classes }) => {
     <Grid container className={classes.details}>
       <Grid lg={11} item>
         <Typography variant="h6" gutterBottom>
-          {item.title}
+          {item.email}
         </Typography>
         <Typography variant="body1" gutterBottom>
           {item.body}
@@ -94,9 +96,17 @@ Details.propTypes = {
   classes: PropTypes.object,
 };
 
-const Home = ({ fetchPostList, postsList, classes }) => {
+const Home = ({ fetchPostList, postsList, classes, totalPagesCount }) => {
+  const INITIAL_PAGE_NUM = 1;
+  const handlePageClick = useCallback(
+    (e) => {
+      fetchPostList(e.selected + 1);
+    },
+    [fetchPostList]
+  );
+
   useEffect(() => {
-    fetchPostList();
+    fetchPostList(INITIAL_PAGE_NUM);
   }, [fetchPostList]);
 
   return (
@@ -112,6 +122,21 @@ const Home = ({ fetchPostList, postsList, classes }) => {
           <Details item={item} key={item.id} classes={classes} />
         ))}
       </div>
+      <div className="card-container">
+        <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={totalPagesCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
+      </div>
     </div>
   );
 };
@@ -123,12 +148,15 @@ Home.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return { postsList: state.postsState.postsList };
+  return {
+    postsList: state.postsState.postsList,
+    totalPagesCount: state.postsState.totalPages,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchPostList: () => {
-    dispatch(fetchPosts());
+  fetchPostList: (e) => {
+    dispatch(fetchPosts(e));
   },
 });
 

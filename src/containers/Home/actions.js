@@ -1,8 +1,8 @@
 import { FETCH_POSTS } from "./constants";
 
-export function fetchPosts() {
+export function fetchPosts(pageNumber) {
   return function (dispatch) {
-    return fetch("http://jsonplaceholder.typicode.com/posts")
+    return fetch(`https://reqres.in/api/users?page=${pageNumber}&per_page=1`)
       .then(
         (response) => response.json(),
         (error) => console.log("An error occurred.", error)
